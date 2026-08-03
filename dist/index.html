@@ -7,6 +7,121 @@
     <title>InspectAI | AI-First Institution Accreditation & Inspection System</title>
     <meta name="description" content="Production-ready, AI-driven educational institution inspection platform. Automate safety checklists, OCR accreditation verification, computer vision defect scans, and compliance reports." />
     <script type="module" crossorigin src="./assets/index-DfivZRQ8.js"></script>
+    <script>
+      // InspectAI GitHub Pages API Simulation Engine
+      (function() {
+        const originalFetch = window.fetch;
+        const mockInstitutions = [
+          { id: 1, name: "Stanford University", type: "University", region: "North America", complianceScore: 96, status: "accredited", studentCount: 17000, facultyCount: 2200 },
+          { id: 2, name: "Massachusetts Institute of Technology (MIT)", type: "University", region: "North America", complianceScore: 98, status: "accredited", studentCount: 11900, facultyCount: 1060 },
+          { id: 3, name: "Oxford University", type: "University", region: "Europe", complianceScore: 92, status: "accredited", studentCount: 24000, facultyCount: 1800 },
+          { id: 4, name: "National Institute of Technology (NIT)", type: "Technical Institute", region: "Asia", complianceScore: 88, status: "probation", studentCount: 6500, facultyCount: 420 },
+          { id: 5, name: "ETH Zurich", type: "University", region: "Europe", complianceScore: 95, status: "accredited", studentCount: 22000, facultyCount: 1500 }
+        ];
+
+        const mockInspections = [
+          { id: 101, institutionId: 1, institutionName: "Stanford University", type: "Annual Accreditation", status: "completed", complianceScore: 96, inspector: "Dr. Robert Vance", date: "2026-07-15", findingsCount: 2 },
+          { id: 102, institutionId: 2, institutionName: "MIT", type: "Safety & Lab Audit", status: "completed", complianceScore: 98, inspector: "Eng. Clara Oswald", date: "2026-07-28", findingsCount: 0 },
+          { id: 103, institutionId: 4, institutionName: "National Institute of Technology", type: "Re-Accreditation Review", status: "in_progress", complianceScore: 88, inspector: "Dr. Marcus Thorne", date: "2026-08-01", findingsCount: 5 }
+        ];
+
+        const mockCorrectiveActions = [
+          { id: 201, institutionName: "National Institute of Technology", title: "Chemistry Lab Eyewash Station Maintenance", priority: "High", status: "in_progress", dueDate: "2026-08-15" },
+          { id: 202, institutionName: "Oxford University", title: "Library Accessibility Ramp Signage", priority: "Medium", status: "completed", dueDate: "2026-07-20" },
+          { id: 203, institutionName: "Stanford University", title: "Emergency Fire Exit Path Clearance", priority: "Low", status: "completed", dueDate: "2026-07-10" }
+        ];
+
+        window.fetch = async function(url, options = {}) {
+          const urlStr = typeof url === 'string' ? url : (url && url.url ? url.url : '');
+          if (!urlStr.includes('/api/')) {
+            return originalFetch.apply(this, arguments);
+          }
+
+          await new Promise(resolve => setTimeout(resolve, 80));
+
+          const createResponse = (data, status = 200) => {
+            return new Response(JSON.stringify(data), {
+              status: status,
+              headers: { 'Content-Type': 'application/json' }
+            });
+          };
+
+          if (urlStr.includes('/api/auth/login')) {
+            let username = 'super_admin';
+            let name = 'Dr. Sarah Jenkins (Super Admin)';
+            let role = 'super_admin';
+            try {
+              if (options.body) {
+                const body = JSON.parse(options.body);
+                if (body.username) {
+                  username = body.username;
+                  if (username.includes('authority')) { role = 'inspection_authority'; name = 'Authority Official'; }
+                  else if (username.includes('inspector')) { role = 'inspector'; name = 'Lead Inspector'; }
+                  else if (username.includes('rep')) { role = 'representative'; name = 'Institution Representative'; }
+                }
+              }
+            } catch(e) {}
+            const user = { id: 1, username, role, name, email: username + '@accredit-ai.org' };
+            localStorage.setItem('inspectai_user', JSON.stringify(user));
+            localStorage.setItem('inspectai_token', 'mock-jwt-token-gh-pages');
+            return createResponse({ token: 'mock-jwt-token-gh-pages', user });
+          }
+
+          if (urlStr.includes('/api/auth/me')) {
+            const saved = localStorage.getItem('inspectai_user');
+            const user = saved ? JSON.parse(saved) : { id: 1, username: 'super_admin', role: 'super_admin', name: 'Dr. Sarah Jenkins (Super Admin)', email: 's.jenkins@accredit-ai.org' };
+            return createResponse(user);
+          }
+
+          if (urlStr.includes('/api/analytics/dashboard')) {
+            return createResponse({
+              summary: {
+                totalInstitutions: mockInstitutions.length,
+                completedInspections: 128,
+                pendingInspections: 14,
+                institutionsAtRisk: 1
+              },
+              auditLogs: [
+                { id: 1, action: "AI Vision Scan Completed", target: "MIT - Lab Safety Verification", timestamp: "5 mins ago" },
+                { id: 2, action: "Accreditation Approved", target: "Stanford University - Engineering", timestamp: "1 hour ago" },
+                { id: 3, action: "Inspection Report Submitted", target: "ETH Zurich - Campus Audit", timestamp: "3 hours ago" },
+                { id: 4, action: "Corrective Action Closed", target: "Oxford University - Library Signage", timestamp: "1 day ago" }
+              ],
+              institutions: mockInstitutions
+            });
+          }
+
+          if (urlStr.includes('/api/institutions')) {
+            return createResponse(mockInstitutions);
+          }
+
+          if (urlStr.includes('/api/inspections')) {
+            return createResponse(mockInspections);
+          }
+
+          if (urlStr.includes('/api/corrective')) {
+            return createResponse(mockCorrectiveActions);
+          }
+
+          if (urlStr.includes('/api/ai/chat')) {
+            return createResponse({
+              reply: "As your AI Accreditation Advisor, I have reviewed your institution's compliance metrics. Overall standing is 96.4% compliant across safety, faculty qualifications, and infrastructure guidelines. No critical regulatory risks detected."
+            });
+          }
+
+          if (urlStr.includes('/api/ai/')) {
+            return createResponse({
+              success: true,
+              confidence: 98.6,
+              status: "VERIFIED",
+              message: "AI scan completed successfully. No compliance anomalies detected."
+            });
+          }
+
+          return createResponse({ status: 'ok', success: true, data: [] });
+        };
+      })();
+    </script>
     <link rel="stylesheet" crossorigin href="./assets/index-Cnp4XNDT.css">
   </head>
   <body>
