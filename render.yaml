@@ -1,0 +1,27 @@
+# Render.com Blueprint — Infrastructure as Code
+# Docs: https://docs.render.com/blueprint-spec
+# To deploy: Connect your GitHub repo to Render, and it auto-detects this file.
+
+services:
+  - type: web
+    name: inspectai-server
+    runtime: node
+    plan: free
+    buildCommand: npm install
+    startCommand: node src/index.js
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: JWT_SECRET
+        generateValue: true  # Auto-generates a secure 64-char random string
+      - key: PORT
+        value: 10000          # Render's default port for free tier
+      - key: DB_DIALECT
+        value: sqlite
+      - key: DB_STORAGE
+        value: ./database.sqlite
+      - key: CORS_ORIGIN
+        value: "*"
+      - key: MAX_FILE_SIZE
+        value: "10485760"
+    healthCheckPath: /api/health
