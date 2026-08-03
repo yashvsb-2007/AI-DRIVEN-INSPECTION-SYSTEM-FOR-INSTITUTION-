@@ -1,182 +1,89 @@
-# 🏫 AI-Driven Inspection System for Institution
+# 🚀 Live Demo
 
-An AI-powered web application that helps educational institutions perform smart inspections, monitor compliance, generate reports, and manage institutional quality through an intuitive dashboard.
+🌐 **Live Website**
 
----
-
-## 🚀 Features
-
-- 🔐 Secure Login & Authentication
-- 🏫 Institution Management
-- 📋 Inspection Management
-- 🤖 AI-Based Inspection Analysis
-- 📊 Interactive Dashboard
-- 📈 Charts & Analytics
-- 📝 Inspection Reports
-- 📄 PDF Report Generation
-- 📂 File Upload Support
-- 👤 User Profile Management
-- 🔍 Search & Filter
-- 📱 Responsive Design
+👉 https://ai-driven-inspection-system-for.onrender.com
 
 ---
 
-## 🛠️ Tech Stack
+# 📂 GitHub Repository
 
-### Frontend
-- HTML5
-- CSS3
-- JavaScript
-
-### Backend
-- Node.js
-- Express.js
-
-### Database
-- SQLite
-- Sequelize ORM
-
-### Security
-- JWT Authentication
-- Bcrypt Password Hashing
-- Helmet
-- Express Rate Limit
+https://github.com/yashvsb-2007/AI-DRIVEN-INSPECTION-SYSTEM-FOR-INSTITUTION
 
 ---
 
-## 📁 Project Structure
+# 📁 Project Structure
 
-```
+```text
 AI-DRIVEN-INSPECTION-SYSTEM-FOR-INSTITUTION/
+│
+├── .github/
+│   └── workflows/
+│       └── ci.yml
 │
 ├── dist/
 │   ├── index.html
 │   └── assets/
 │
 ├── src/
-│   ├── index.js
-│   ├── db.js
-│   ├── seed.js
+│   ├── controllers/
+│   │   ├── aiController.js
+│   │   ├── authController.js
+│   │   ├── correctiveController.js
+│   │   ├── inspectionController.js
+│   │   └── institutionController.js
+│   │
 │   ├── middleware/
-│   └── controllers/
+│   │   └── auth.js
+│   │
+│   ├── db.js
+│   ├── index.js
+│   └── seed.js
 │
 ├── uploads/
+├── .env.example
+├── .gitignore
 ├── database.sqlite
+├── LICENSE
+├── README.md
 ├── package.json
 ├── package-lock.json
 ├── render.yaml
-├── .env.example
-├── README.md
-└── .gitignore
+└── start.js
 ```
 
 ---
 
-## ⚙️ Installation
+# 🛠️ Technologies Used
 
-Clone the repository
+- HTML5
+- CSS3
+- JavaScript
+- Node.js
+- Express.js
+- SQLite3
+- Sequelize ORM
+- JWT Authentication
+- bcrypt.js
+- Helmet
+- Express Rate Limit
+- Multer
+
+---
+
+# ⚙️ Installation
 
 ```bash
-git clone https://github.com/YOUR_USERNAME/AI-DRIVEN-INSPECTION-SYSTEM-FOR-INSTITUTION.git
-```
+git clone https://github.com/yashvsb-2007/AI-DRIVEN-INSPECTION-SYSTEM-FOR-INSTITUTION.git
 
-Move into the project folder
-
-```bash
 cd AI-DRIVEN-INSPECTION-SYSTEM-FOR-INSTITUTION
-```
 
-Install dependencies
-
-```bash
 npm install
-```
 
-Start the server
-
-```bash
 npm start
 ```
 
-The application will run on:
 
-```
-https://ai-driven-inspection-system-for.onrender.com
-```
 
----
 
-## 📦 Dependencies
-
-- Express
-- Sequelize
-- SQLite3
-- bcryptjs
-- dotenv
-- jsonwebtoken
-- multer
-- cors
-- helmet
-- express-rate-limit
-- express-validator
-
----
-
-## 🌐 Deployment
-
-This project is configured for deployment on **Render**.
-
-### Render Settings
-
-| Setting | Value |
-|---------|-------|
-| Environment | Node |
-| Build Command | npm install |
-| Start Command | npm start |
-| Root Directory | Leave Empty |
-
----
-
-## 📷 Modules
-
-- User Authentication
-- Dashboard
-- Institution Management
-- Inspection Management
-- AI Inspection
-- Report Generation
-- Analytics
-- Settings
-
----
-
-## 🔒 Environment Variables
-
-Create a `.env` file using `.env.example`.
-
-Example:
-
-```env
-PORT=3000
-JWT_SECRET=your_secret_key
-NODE_ENV=production
-```
-
----
-
-## 👨‍💻 Author
-
-**Yashwanth**
-
----
-
-## 📄 License
-
-This project is licensed under the MIT License.
-
----
-
-## ⭐ Support
-
-If you like this project, consider giving it a ⭐ on GitHub.
 
